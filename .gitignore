@@ -14,3 +14,6 @@
 
 # Ignore secret keys
 .env
+
+# Ignore Coveralls reports
+/coverage
