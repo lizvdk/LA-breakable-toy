@@ -1,5 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe User, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe User do
+  let(:blank_values) { [nil, ""] }
+
+  describe "#username" do
+    it { should have_valid(:username).when("lizvdk", "liz123") }
+    it { should_not have_valid(:username).when("xx", "#{'x' * 21 }", *blank_values) }
+  end
 end
