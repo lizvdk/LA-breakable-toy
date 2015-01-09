@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h2><%= @user.username %></h2>
+    <% if @user == current_user %>
+      <%= link_to "Edit Account", edit_user_registration_path(@user) %>
+    <% end %>
+  </div>
+</div>
