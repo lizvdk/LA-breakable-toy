@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: :show
+  resources :reports, only: [:index, :show, :new, :create]
 end
