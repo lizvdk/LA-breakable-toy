@@ -12,6 +12,8 @@ class ReportsController < ApplicationController
     @report.user = current_user
     if @report.save
       redirect_to report_path(@report), notice: "Report Submitted"
+    else
+      render :new
     end
   end
 

@@ -24,4 +24,25 @@ feature "user submits a report", %{
     expect(page).to have_content report.latitude
     expect(page).to have_content report.longitude
   end
+
+  scenario "invalid input" do
+    report = FactoryGirl.build(:report)
+    sign_in(report.user)
+
+    visit root_path
+
+    click_on "Report an Issue"
+
+    click_on "Submit Report"
+
+    expect(page).to have_content "can't be blank"
+  end
+
+  scenario "unregistered user cannot submit a report" do
+    visit root_path
+
+    click_on "Report an Issue"
+
+    expect(page).to have_content "You must sign in"
+  end
 end
