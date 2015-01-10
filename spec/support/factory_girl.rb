@@ -8,4 +8,15 @@ FactoryGirl.define do
     password_confirmation "password"
   end
 
+  factory :category do
+    sequence(:name) { |n| "category#{n}" }
+  end
+
+  factory :report do
+    sequence(:latitude) { |n| "42.3#{n}" } 
+    sequence(:longitude) { |n| "71.05#{n}" }
+
+    user
+    category
+  end
 end
