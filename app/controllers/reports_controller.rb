@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def show
     @report = Report.find(params[:id])
   end
