@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
   validates :username, length: { in: 3..20 }
   validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/,
                                  message: "only allows letters and numbers" }
+
+  has_many :reports,
+           dependent: :destroy
 end
