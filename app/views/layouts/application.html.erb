@@ -3,6 +3,8 @@
 <head>
   <title>BreakableToy</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag "https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js" %>
+  <%= stylesheet_link_tag "https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -17,6 +19,7 @@
     <section class="top-bar-section">
       <ul class="right">
         <li><%= link_to "Report an Issue", new_report_path %></li>
+        <li><%= link_to "View Reports", reports_path %></li>
         <% if current_user %>
           <li><%= link_to current_user.username, user_path(current_user) %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
