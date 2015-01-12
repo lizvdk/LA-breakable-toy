@@ -15,4 +15,14 @@
  *= require foundation_and_overrides
 
  */
-#map { position:absolute; top:0; bottom:0; width:100%; }
+html, body {
+ height: 100%;
+}
+
+#map { top:0; bottom:0; width:100%; }
+
+.new-report-map { width:500px; height: 500px }
+
+.all-reports-map { width:500px; height: 500px }
+
+#coordinates {height: 500px; width: 500px; background-color: #000; color: #fff }
