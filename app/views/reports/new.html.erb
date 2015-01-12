@@ -1,1 +1,14 @@
-<%= render "form" %>
+<div class="row">
+  <%= render "form" %>
+</div>
+<div class="row">
+  <div id="map" class="new-report-map"></div>
+</div>
+
+<%= content_for :extra_footer do %>
+  <% javascript_tag do %>
+    $(function(){
+      drawNewReportMap();
+    });
+  <% end %>
+<% end %>

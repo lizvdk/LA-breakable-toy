@@ -1,2 +1,11 @@
-<div id='map'></div>
+<div class="row">
+  <div id="map" class="all-reports-map"></div>
+</div>
 <%= javascript_include_tag "reports/index/map" %>
+<%= content_for :extra_footer do %>
+<% javascript_tag do %>
+    $(function(){
+      drawIndexReportMap();
+    });
+  <% end %>
+<% end %>
