@@ -41,7 +41,12 @@ function drawIndexReportMap(){
     map.data.addListener('click', function(event) {
       var reportCategory = event.feature.getProperty("category");
       var linkToReport = event.feature.getProperty("url");
-      infowindow.setContent("<a href=" + linkToReport + ">"+reportCategory+"</div>");
+      var reportPhoto = event.feature.getProperty("photo");
+      infowindow.setContent("<a href=" + linkToReport + ">"+
+                            "<img class='map-thumb' src='" +
+                            reportPhoto + "'/>" +
+                            "<br/>" +
+                            reportCategory+"</div>");
       infowindow.setPosition(event.feature.getGeometry().get());
       infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
       infowindow.open(map);

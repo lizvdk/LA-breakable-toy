@@ -26,3 +26,9 @@ html, body {
 .all-reports-map { width:500px; height: 500px }
 
 #coordinates {height: 500px; width: 500px; background-color: #000; color: #fff }
+
+.map-thumb {
+  max-width: 75px;
+  width: 100%;
+  height: auto;
+}

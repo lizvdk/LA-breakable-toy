@@ -14,7 +14,7 @@ class ReportsController < ApplicationController
         properties: {
           category: report.category.name,
           url: report_path(report),
-          photo: "http://lorempixel.com/g/100/100/city/"
+          photo: report.photo.small_thumb.url
         }
       }
     end

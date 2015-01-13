@@ -58,3 +58,4 @@ gem "rails_12factor", group: :production
 gem "carrierwave"
 gem "dotenv-rails", groups: [:development, :test]
 gem "fog", groups: [:development, :production]
+gem "mini_magick"
