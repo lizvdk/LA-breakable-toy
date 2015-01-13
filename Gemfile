@@ -56,3 +56,5 @@ gem 'foundation-rails'
 gem "simple_form"
 gem "rails_12factor", group: :production
 gem "carrierwave"
+gem "dotenv-rails", groups: [:development, :test]
+gem "fog", groups: [:development, :production]
