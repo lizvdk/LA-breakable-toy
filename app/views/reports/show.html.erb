@@ -1,10 +1,15 @@
 <div class="row">
-  <div class="small-12 columns">
-    <%= @report.category.name %>
+  <div class="small-12 medium-4 columns">
+    <%= image_tag(@report.photo.url,
+        class: "report-image-#{@report.id}",
+        alt: "#{@report.image_alt}" ) %>
   </div>
-</div>
-<div class="row">
-  <div class="small-12 columns">
-    Coordinates: <%= @report.latitude %>, <%= @report.longitude %>
+  <div class="small-12 medium-8 columns">
+    <div class="row">
+      <%= @report.category.name %>
+    </div>
+    <div class="row">
+      Coordinates: <%= @report.latitude %>, <%= @report.longitude %>
+    </div>
   </div>
 </div>

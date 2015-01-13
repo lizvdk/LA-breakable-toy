@@ -9,6 +9,7 @@ feature "user submits a report", %{
   scenario "valid input" do
     report = FactoryGirl.build(:report)
     sign_in(report.user)
+    photo = "spec/fixtures/images/test_photo.jpeg"
 
     visit root_path
 
@@ -17,12 +18,14 @@ feature "user submits a report", %{
     select report.category.name, from: "Category"
     fill_in "Latitude", with: report.latitude
     fill_in "Longitude", with: report.longitude
+    attach_file("Photo", photo)
     click_on "Submit Report"
 
     expect(page).to have_content "Report Submitted"
     expect(page).to have_content report.category.name
     expect(page).to have_content report.latitude
     expect(page).to have_content report.longitude
+    expect(page).to have_selector("img[alt=\"#{report.image_alt}\"]")
   end
 
   scenario "invalid input" do
