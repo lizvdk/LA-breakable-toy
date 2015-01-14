@@ -1,5 +1,6 @@
 function drawNewReportMap(){
   var geocoder = new google.maps.Geocoder();
+  var placeSearch, autocomplete;
 
   function geocodePosition(pos) {
     geocoder.geocode({
@@ -25,7 +26,13 @@ function drawNewReportMap(){
   }
 
   function initialize() {
+    autocomplete = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('report_address')),
+    { types: ['geocode'] });
     var latLng = new google.maps.LatLng(42.3603, -71.058);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      latLng = autocomplete.getPlace();
+    });
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 8,
       center: latLng,
@@ -54,6 +61,10 @@ function drawNewReportMap(){
     google.maps.event.addListener(marker, 'dragend', function() {
       geocodePosition(marker.getPosition());
     });
+  }
+
+  function fillInAddress() {
+    var place = autocomplete.getPlace();
   }
 
   // Onload handler to fire off the app.

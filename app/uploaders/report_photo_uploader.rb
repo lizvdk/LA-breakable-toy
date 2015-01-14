@@ -1,10 +1,15 @@
 # encoding: utf-8
 
 class ReportPhotoUploader < CarrierWave::Uploader::Base
+  if Rails.env.test?
+    storage :file
+  else
+    storage :fog
+  end
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-
 
   def default_url
     "http://lorempixel.com/g/500/500/city/"
@@ -24,7 +29,6 @@ class ReportPhotoUploader < CarrierWave::Uploader::Base
     end
   end
 
-
   version :thumb do
     process resize_to_limit: [100, 100]
   end
@@ -32,5 +36,4 @@ class ReportPhotoUploader < CarrierWave::Uploader::Base
   version :small_thumb, from_version: :thumb do
     process resize_to_limit: [75, 75]
   end
-
 end
