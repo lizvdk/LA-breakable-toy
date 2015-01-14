@@ -3,6 +3,8 @@
 <head>
   <title>BreakableToy</title>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Montserrat:400,700" %>
+  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Merriweather:400,300" %>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places" %>
   <%= csrf_meta_tags %>
 </head>
@@ -11,7 +13,7 @@
   <nav class="top-bar">
     <ul class="title-area">
       <li class="name">
-        <h1><a href="/">BreakableToy</a></h1>
+        <h1><a href="/">Bright Lights</a></h1>
       </li>
     </ul>
 
@@ -35,8 +37,9 @@
       <%= value %>
     </div>
   <% end %>
-
-  <%= yield %>
+  <div class="row">
+    <%= yield %>
+  </div>
 
   <%= javascript_include_tag 'application' %>
   <%= javascript_tag do %>
