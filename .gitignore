@@ -17,3 +17,6 @@
 
 # Ignore Coveralls reports
 /coverage
+
+# Ignore uploaded files in test/development
+/public/uploads

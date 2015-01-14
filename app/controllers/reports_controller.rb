@@ -14,7 +14,7 @@ class ReportsController < ApplicationController
         properties: {
           category: report.category.name,
           url: report_path(report),
-          photo: "http://lorempixel.com/g/100/100/city/"
+          photo: report.photo.small_thumb.url
         }
       }
     end
@@ -51,6 +51,6 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:category_id, :user_id, :description,
-                                   :latitude, :longitude, :address)
+                                   :latitude, :longitude, :address, :photo)
   end
 end

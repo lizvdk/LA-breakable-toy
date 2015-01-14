@@ -14,4 +14,10 @@ class Report < ActiveRecord::Base
 
   belongs_to :category
   belongs_to :user
+
+  mount_uploader :photo, ReportPhotoUploader
+
+  def image_alt
+    sprintf("category.name-%.2dx%d", latitude, longitude)
+  end
 end
