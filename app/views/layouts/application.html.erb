@@ -22,7 +22,7 @@
         <li><%= link_to "Report an Issue", new_report_path %></li>
         <li><%= link_to "View Reports", reports_path %></li>
         <% if current_user %>
-          <li><%= link_to current_user.username, user_path(current_user) %></li>
+          <li><%= link_to current_user.email, user_path(current_user) %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
