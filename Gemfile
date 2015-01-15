@@ -59,3 +59,5 @@ gem "carrierwave"
 gem "dotenv-rails", groups: [:development, :test]
 gem "fog", groups: [:development, :production]
 gem "mini_magick"
+gem "omniauth"
+gem "omniauth-google-oauth2"
