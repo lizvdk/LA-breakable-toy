@@ -13,8 +13,17 @@ function drawIndexReportMap(){
     .loadURL('/reports.json')
     .addTo(map);
 
+  var markerList = document.getElementById('marker-list');
+
+
   map.featureLayer.on('ready', function(e) {
     featureLayer.eachLayer(function(layer) {
+      var item = markerList.appendChild(document.createElement('li'));
+      item.innerHTML = layer.toGeoJSON().properties.category;
+      item.onclick = function() {
+        map.setView(layer.getLatLng(), 14);
+        layer.openPopup();
+      };
       var content = '<a target="_blank" class="popup" href="' +
       layer.feature.properties.url + '">' +
       '<img src="' + layer.feature.properties.photo + '" />' +
