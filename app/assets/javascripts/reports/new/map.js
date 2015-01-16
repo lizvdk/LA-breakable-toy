@@ -1,72 +1,59 @@
 function drawNewReportMap(){
-  var geocoder = new google.maps.Geocoder();
-  var placeSearch, autocomplete;
+  L.mapbox.accessToken = "pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA";
 
-  function geocodePosition(pos) {
-    geocoder.geocode({
-      latLng: pos
-    }, function(responses) {
-      if (responses && responses.length > 0) {
-        updateMarkerAddress(responses[0].formatted_address);
-      } else {
-        updateMarkerAddress('Cannot determine address at this location.');
-      }
+  var geocoder = L.mapbox.geocoder('mapbox.places');
+
+  var map = L.mapbox.map('map', 'lizvdk.ko5f732m');
+
+  var marker = L.marker([42.3603, -71.0580],{
+    icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
+    draggable: true
+  }).addTo(map);
+
+  function onLocationFound(e) {
+    marker.setLatLng(e.latlng).update();
+    // marker = L.marker(e.latlng, {
+    //   icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
+    //   draggable: true
+    // }).addTo(map);
+
+    marker.on('dragend', function (e) {
+      $('#report_latitude').val(marker.getLatLng().lat);
+      $('#report_longitude').val(marker.getLatLng().lng);
     });
+
   }
 
-  function updateMarkerPosition(latLng) {
-    document.getElementById('report_latitude').value =
-    latLng.lat()
-    document.getElementById('report_longitude').value =
-    latLng.lng()
+  function onLocationError(e) {
+    alert(e.message);
   }
 
-  function updateMarkerAddress(str) {
-    document.getElementById('report_address').value = str;
+  map.on('locationfound', onLocationFound);
+  map.on('locationerror', onLocationError);
+  map.locate({setView: true, maxZoom: 16});
+
+  $(function() {
+
+    var $searchBox = $('.leaflet-control-mapbox-geocoder-form').children().first();
+    var $formAddress = $('#report_address');
+
+    $formAddress.focusout( function(e) {
+      // var searchContent = $searchBox.val();
+      // $formAddress.val(searchContent);
+      var address = $formAddress.val();
+      geocoder.query(address, populateLatLong);
+    });
+  });
+
+  function populateLatLong(err, data) {
+    var lat = data.latlng[0];
+    var lng = data.latlng[1];
+    $('#report_latitude').val(lat);
+    $('#report_longitude').val(lng);
+
+    marker.setLatLng(data.latlng).update();
+
+    map.panTo(data.latlng);
   }
 
-  function initialize() {
-    autocomplete = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('report_address')),
-    { types: ['geocode'] });
-    var latLng = new google.maps.LatLng(42.3603, -71.058);
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-      latLng = autocomplete.getPlace();
-    });
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    var marker = new google.maps.Marker({
-      position: latLng,
-      title: 'Point A',
-      map: map,
-      draggable: true
-    });
-
-    // Update current position info.
-    updateMarkerPosition(latLng);
-    geocodePosition(latLng);
-
-    // Add dragging event listeners.
-    google.maps.event.addListener(marker, 'dragstart', function() {
-      updateMarkerAddress('Dragging...');
-    });
-
-    google.maps.event.addListener(marker, 'drag', function() {
-      updateMarkerPosition(marker.getPosition());
-    });
-
-    google.maps.event.addListener(marker, 'dragend', function() {
-      geocodePosition(marker.getPosition());
-    });
-  }
-
-  function fillInAddress() {
-    var place = autocomplete.getPlace();
-  }
-
-  // Onload handler to fire off the app.
-  google.maps.event.addDomListener(window, 'load', initialize);
-};
+}

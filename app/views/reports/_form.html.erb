@@ -1,9 +1,22 @@
-<%= simple_form_for @report do |f| %>
-<%= f.association :category %>
-<%= f.input :address %>
-<%= f.input :latitude %>
-<%= f.input :longitude %>
-<%= f.input :description %>
-<%= f.input :photo, type: :file %>
-<%= f.button :submit, "Submit Report" %>
-<% end %>
+<div id="new-report-form">
+  <fieldset>
+    <legend>Submit a report</legend>
+    <%= simple_form_for @report do |f| %>
+      <div class="row">
+        <div class="small-12 medium-6  columns">
+          <%= f.association :category %>
+        </div>
+        <div class="small-6 medium-3 columns">
+          <%= f.input :latitude %>
+        </div>
+        <div class="small-6 medium-3 columns">
+          <%= f.input :longitude %>
+        </div>
+      </div>
+      <%= f.input :address %>
+      <%= f.input :description %>
+      <%= f.input :photo, type: :file %>
+      <%= f.button :submit, "Submit Report" %>
+    <% end %>
+  </fieldset>
+</div>

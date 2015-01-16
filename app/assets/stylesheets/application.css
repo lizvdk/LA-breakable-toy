@@ -21,12 +21,9 @@ html, body {
 
 #map { top:0; bottom:0; width:100%; }
 
-.new-report-map { width:500px; height: 500px }
+.new-report-map { height: 500px }
 
 .all-reports-map { width:500px; height: 500px }
-
-.gm-style img { max-width: none; }
-.gm-style label { width: auto; display: inline; }
 
 #coordinates {height: 500px; width: 500px; background-color: #000; color: #fff }
 
@@ -35,3 +32,5 @@ html, body {
   width: 100%;
   height: auto;
 }
+
+#new-report-form { height: 500px; }
