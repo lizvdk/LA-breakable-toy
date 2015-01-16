@@ -8,29 +8,20 @@ function drawIndexReportMap(){
     autocomplete: true
   }));
 
+
   var featureLayer = L.mapbox.featureLayer()
-  .loadURL('/reports.json')
-  .addTo(map);
+    .loadURL('/reports.json')
+    .addTo(map);
 
-  var myLayer = L.mapbox.featureLayer().addTo(map);
-
-  myLayer.on('layeradd', function(e) {
-    var marker = e.layer,
-    feature = marker.feature;
-
-    // Create custom popup content
-    var popupContent =
-    '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
-    '<img src="' + feature.properties.photo + '" />' +
-    feature.properties.category +
-    '</a>';
-
-    // http://leafletjs.com/reference.html#popup
-    marker.bindPopup(popupContent,{
-      closeButton: false,
+  map.featureLayer.on('ready', function(e) {
+    featureLayer.eachLayer(function(layer) {
+      var content = '<a target="_blank" class="popup" href="' +
+      layer.feature.properties.url + '">' +
+      '<img src="' + layer.feature.properties.photo + '" />' +
+      layer.feature.properties.category +
+      '</a>';
+      layer.bindPopup(content);
     });
   });
 
-  // Add features to the map
-  myLayer.loadURL('/reports.json').addTo(map);
 }
