@@ -7,12 +7,17 @@ function drawNewReportMap(){
     keepOpen: true,
     autocomplete: true
   }));
+  var marker = L.marker([42.3603, -71.0580],{
+    icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
+    draggable: true
+  }).addTo(map);
 
   function onLocationFound(e) {
-    var marker = L.marker(e.latlng, {
-      icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
-      draggable: true
-    }).addTo(map);
+    marker.setLatLng(e.latlng).update()
+    // marker = L.marker(e.latlng, {
+    //   icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
+    //   draggable: true
+    // }).addTo(map);
 
     marker.on('dragend', function (e) {
       document.getElementById('report_latitude').value = marker.getLatLng().lat;
@@ -49,10 +54,12 @@ function drawNewReportMap(){
     $('#report_latitude').val(lat);
     $('#report_longitude').val(long);
 
-    L.marker(data.latlng, {
-      icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
-      draggable: true
-    }).addTo(map);
+    // L.marker(data.latlng, {
+    //   icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
+    //   draggable: true
+    // }).addTo(map);
+
+    marker.setLatLng(data.latlng).update();
 
     map.panTo(data.latlng);
   }
