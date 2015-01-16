@@ -13,7 +13,7 @@ feature "user edits account", %{
 
     visit root_path
 
-    click_link user.username
+    click_link user.email
 
     click_link "Edit Account"
 
@@ -22,7 +22,5 @@ feature "user edits account", %{
     click_button "Update"
 
     expect(page).to have_content "Your account has been updated successfully"
-
-    expect(page).to have_content "changedusername1"
   end
 end
