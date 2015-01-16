@@ -1,8 +1,10 @@
-<div class="row">
-  <%= render "form" %>
-</div>
-<div class="row">
-  <div id="map" class="new-report-map gm-style"></div>
+<div class="row" data-equalizer >
+  <div class="small-12 medium-6 columns" data-equalizer-watch>
+    <%= render "form" %>
+  </div>
+  <div class="small-12 medium-6 columns" data-equalizer-watch >
+    <div id="map" class="new-report-map"></div>
+  </div>
 </div>
 
 <%= content_for :extra_footer do %>
