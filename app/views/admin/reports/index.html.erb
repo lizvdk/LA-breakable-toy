@@ -1,0 +1,14 @@
+<div>
+  <ul>
+  <% @reports.each do |report| %>
+    <li>
+    <%= report.category.name %>
+    <%= report.latitude %> , <%= report.longitude %>
+    <%= simple_form_for [:admin, report] do |f| %>
+      <%= f.input :status, collection: [ "Open", "In Progress", "Closed"] %>
+      <%= f.submit %>
+    <% end %>
+    </li>
+  <% end %>
+  </ul>
+</div>
