@@ -8,7 +8,7 @@ feature "user edits report", %{
 
   let(:report) { FactoryGirl.create(:report) }
 
-  scenario "user may edit their own profile" do
+  scenario "user may edit their own report" do
     sign_in report.user
     visit report_path(report)
     click_link "Edit Report"
@@ -22,6 +22,6 @@ feature "user edits report", %{
 
   scenario "user may not edit another user's report" do
     visit report_path(report)
-    expect(page).not_to have_content "Edit Review"
+    expect(page).not_to have_content "Edit Report"
   end
 end

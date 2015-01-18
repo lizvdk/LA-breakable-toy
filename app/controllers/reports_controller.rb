@@ -61,6 +61,16 @@ class ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    @report = current_user.reports.find(params[:id])
+    if @report.destroy
+      flash[:notice] = "Report deleted"
+      redirect_to reports_path
+    else
+      render :show
+    end
+  end
+
   private
 
   def report_params
