@@ -12,6 +12,10 @@ class Report < ActiveRecord::Base
   validates :category, presence: true
   validates :user, presence: true
 
+  validates :status, presence: true
+  validates :status, inclusion: { in: ["Open", "In Progress", "Closed"],
+                                  message: "%{value} is not a valid status" }
+
   belongs_to :category
   belongs_to :user
 
