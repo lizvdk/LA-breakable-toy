@@ -61,3 +61,4 @@ gem "fog", groups: [:development, :production]
 gem "mini_magick"
 gem "omniauth"
 gem "omniauth-google-oauth2"
+gem "local_time"

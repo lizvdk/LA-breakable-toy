@@ -12,12 +12,20 @@ class Report < ActiveRecord::Base
   validates :category, presence: true
   validates :user, presence: true
 
+  validates :status, presence: true
+  validates :status, inclusion: { in: ["Open", "In Progress", "Closed"],
+                                  message: "%{value} is not a valid status" }
+
   belongs_to :category
   belongs_to :user
 
   mount_uploader :photo, ReportPhotoUploader
 
+  def simple_coordinates
+    sprintf("%.4f, %.4f", latitude, longitude)
+  end
+
   def image_alt
-    sprintf("category.name-%.2dx%d", latitude, longitude)
+    "category.name-#{simple_coordinates}"
   end
 end

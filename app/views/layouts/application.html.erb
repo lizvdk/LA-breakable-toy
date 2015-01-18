@@ -20,6 +20,9 @@
 
     <section class="top-bar-section">
       <ul class="right">
+        <% if signed_in? && current_user.admin? %>
+          <li><%= link_to 'Admin Dashboard', admin_dashboards_path %></li>
+        <% end %>
         <li><%= link_to "Report an Issue", new_report_path %></li>
         <li><%= link_to "View Reports", reports_path %></li>
         <% if current_user %>

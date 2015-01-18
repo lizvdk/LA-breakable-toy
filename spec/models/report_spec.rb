@@ -22,6 +22,11 @@ describe Report do
     it { should_not have_valid(:description).when("#{'x' * 501}") }
   end
 
+  describe "#status" do
+    it { should have_valid(:status).when("Open", "In Progress", "Closed") }
+    it { should_not have_valid(:status).when("anything else", *blank_values) }
+  end
+
 
   it { should belong_to(:user) }
   it { should belong_to(:category) }

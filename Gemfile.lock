@@ -182,6 +182,8 @@ GEM
     jwt (1.2.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    local_time (1.0.1)
+      coffee-rails
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -344,6 +346,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  local_time
   mini_magick
   omniauth
   omniauth-google-oauth2

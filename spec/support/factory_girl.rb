@@ -13,8 +13,9 @@ FactoryGirl.define do
   end
 
   factory :report do
-    sequence(:latitude) { |n| "42.3#{n}" } 
+    sequence(:latitude) { |n| "42.3#{n}" }
     sequence(:longitude) { |n| "71.05#{n}" }
+    status "Open"
 
     user
     category
