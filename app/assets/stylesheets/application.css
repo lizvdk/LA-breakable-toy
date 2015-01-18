@@ -44,3 +44,13 @@ html, body {
   padding:10px;
   border-radius:3px;
 }
+
+#wrapper {
+  background: url("root-image.jpeg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100% !important;
+  z-index: 0;
+}
