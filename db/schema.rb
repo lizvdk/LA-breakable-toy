@@ -23,16 +23,16 @@ ActiveRecord::Schema.define(version: 20150118170907) do
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
   create_table "reports", force: :cascade do |t|
-    t.float    "latitude",    null: false
-    t.float    "longitude",   null: false
+    t.float    "latitude",                     null: false
+    t.float    "longitude",                    null: false
     t.text     "description"
-    t.integer  "category_id", null: false
-    t.integer  "user_id",     null: false
+    t.integer  "category_id",                  null: false
+    t.integer  "user_id",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "address"
     t.string   "photo"
-    t.string   "status"
+    t.string   "status",      default: "Open"
   end
 
   create_table "users", force: :cascade do |t|

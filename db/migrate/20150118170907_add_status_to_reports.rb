@@ -1,5 +1,5 @@
 class AddStatusToReports < ActiveRecord::Migration
   def change
-    add_column :reports, :status, :string
+    add_column :reports, :status, :string, default: "Open"
   end
 end

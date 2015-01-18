@@ -40,7 +40,6 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.user = current_user
-    @report.status = "Open"
     if @report.save
       redirect_to report_path(@report), notice: "Report Submitted"
     else
