@@ -13,3 +13,11 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <%= @report.description %>
+</div>
+<div class="row">
+  <% if current_user == @report.user %>
+    <%= link_to("Edit Report", edit_report_path(@report), class: "button alert tiny") %>
+  <% end %>
+</div>

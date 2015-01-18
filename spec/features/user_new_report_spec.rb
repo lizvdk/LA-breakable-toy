@@ -19,7 +19,7 @@ feature "user submits a report", %{
     fill_in "Latitude", with: report.latitude
     fill_in "Longitude", with: report.longitude
     attach_file("Photo", photo)
-    click_on "Submit Report"
+    click_on "Submit"
 
     expect(page).to have_content "Report Submitted"
     expect(page).to have_content report.category.name
@@ -36,7 +36,7 @@ feature "user submits a report", %{
 
     click_on "Report an Issue"
 
-    click_on "Submit Report"
+    click_on "Submit"
 
     expect(page).to have_content "can't be blank"
   end

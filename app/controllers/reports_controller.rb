@@ -47,6 +47,20 @@ class ReportsController < ApplicationController
     end
   end
 
+  def edit
+    @report = current_user.reports.find(params[:id])
+  end
+
+  def update
+    @report = current_user.reports.find(params[:id])
+    if @report.update(report_params)
+      flash[:notice] = "Your report has been updated successfully"
+      redirect_to report_path(@report)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def report_params
