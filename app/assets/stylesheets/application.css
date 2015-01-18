@@ -44,3 +44,7 @@ html, body {
   padding:10px;
   border-radius:3px;
 }
+
+.no-decoration {
+  list-style-type: none;
+}

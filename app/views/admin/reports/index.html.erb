@@ -1,13 +1,47 @@
 <div>
-  <ul>
+  <ul class="no-decoration">
   <% @reports.each do |report| %>
     <li>
-    <%= report.category.name %>
-    <%= report.latitude %> , <%= report.longitude %>
-    <%= simple_form_for [:admin, report] do |f| %>
-      <%= f.input :status, collection: [ "Open", "In Progress", "Closed"] %>
-      <%= f.submit %>
-    <% end %>
+      <div class="row collapse">
+        <%= form_for [:admin, report] do |f| %>
+          <div class="row panel">
+            <div class="small-2 columns">
+              <div class="row">
+                <%= link_to image_tag(report.photo.small_thumb.url, class: "th radius"), report_path(report) %>
+              </div>
+            </div>
+            <div class="small-6 columns">
+              <div class="row">
+                <h2><%= report.category.name %></h2>
+              </div>
+              <div class="row">
+                <%= report.simple_coordinates %>
+              </div>
+              <div class="row">
+                <%= report.description %>
+              </div>
+            </div>
+            <div class="small-4 columns">
+              <div class="row collapse">
+                <div class="small-6 columns">
+                  <%= f.select :status, [ "Open", "In Progress", "Closed"] %>
+                </div>
+                <div class="small-6 columns">
+                  <%= f.submit class: "button postfix" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="row">
+                  Created: <%= local_time(report.created_at, format: '%b %e, %Y %l:%M%P') %>
+                </div>
+                <div class="row">
+                  Updated: <%= local_time(report.updated_at, format: '%b %e, %Y %l:%M%P') %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </li>
   <% end %>
   </ul>

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require local_time
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

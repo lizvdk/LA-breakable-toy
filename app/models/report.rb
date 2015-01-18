@@ -21,7 +21,11 @@ class Report < ActiveRecord::Base
 
   mount_uploader :photo, ReportPhotoUploader
 
+  def simple_coordinates
+    sprintf("%.4f, %.4f", latitude, longitude)
+  end
+
   def image_alt
-    sprintf("category.name-%.2dx%d", latitude, longitude)
+    "category.name-#{simple_coordinates}"
   end
 end
