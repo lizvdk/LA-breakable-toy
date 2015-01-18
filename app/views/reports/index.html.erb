@@ -1,5 +1,11 @@
 <div class="row">
-  <div id="map" class="all-reports-map gm-style"></div>
+  <div id="map" class="all-reports-map"></div>
+  <nav id='filters' class='filter-ui'></nav>
+  
+</div>
+<div class="row">
+  <ul id='marker-list'>
+  </ul>
 </div>
 <%= javascript_include_tag "reports/index/map" %>
 <%= content_for :extra_footer do %>
