@@ -3,7 +3,7 @@ function drawIndexReportMap(){
   L.mapbox.accessToken = "pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA";
 
   var map = L.mapbox.map("map", "lizvdk.knp8dn4m")
-  .setView([42.36, -71.05], 8)
+  .setView([42.36, -71.05], 9)
   .addControl(L.mapbox.geocoderControl('mapbox.places-v1', {
     autocomplete: true
   }));
@@ -13,66 +13,60 @@ function drawIndexReportMap(){
     .loadURL('/reports.json')
     .addTo(map);
 
-  var markerList = document.getElementById('marker-list');
-  var filters = document.getElementById('filters');
+  // Ahead of time, select the elements we'll need -
+  // the narrative container and the individual sections
+  var narrative = $('#all-reports').get(0);
+  var sections = $('#all-reports').find('section');
+  var currentId = '';
 
+  setId('cover');
 
-  map.featureLayer.on('ready', function(e) {
-    var typesObj = {}, types = [];
-    var features = map.featureLayer.getGeoJSON().features;
-    for (var i = 0; i < features.length; i++) {
-      typesObj[features[i].properties['marker-symbol']] = true;
-    }
-    for (var k in typesObj) types.push(k);
-
-    var checkboxes = [];
-    for (var i = 0; i < types.length; i++) {
-      // Create an an input checkbox and label inside.
-      var item = filters.appendChild(document.createElement('div'));
-      var checkbox = item.appendChild(document.createElement('input'));
-      var label = item.appendChild(document.createElement('label'));
-      checkbox.type = 'checkbox';
-      checkbox.id = types[i];
-      checkbox.checked = true;
-      // create a label to the right of the checkbox with explanatory text
-      label.innerHTML = types[i];
-      label.setAttribute('for', types[i]);
-      // Whenever a person clicks on this checkbox, call the update().
-      checkbox.addEventListener('change', update);
-      checkboxes.push(checkbox);
-    }
-
+  function setId(newId) {
+    // If the ID hasn't actually changed, don't do anything
+    if (newId === currentId) return;
+    // Otherwise, iterate through layers, setting the current
+    // marker to a different color and zooming to it.
     featureLayer.eachLayer(function(layer) {
-      var item = markerList.appendChild(document.createElement('li'));
-      item.innerHTML = layer.toGeoJSON().properties.category;
-      item.onclick = function() {
-        map.setView(layer.getLatLng(), 14);
-        layer.openPopup();
-      };
-      var content = '<a target="_blank" class="popup" href="' +
-      layer.feature.properties.url + '">' +
-      '<img src="' + layer.feature.properties.photo + '" />' +
-      layer.feature.properties.category +
-      '</a>';
-      layer.bindPopup(content);
+      if (layer.feature.properties.id === newId) {
+        map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
+        layer.setIcon(L.mapbox.marker.icon({
+          'marker-size': 'large',
+          'marker-color': '#000',
+          'marker-symbol': layer.feature.properties['marker-symbol']
+        }));
+      } else {
+        layer.setIcon(L.mapbox.marker.icon({
+          'marker-size': 'small',
+          'marker-color': layer.feature.properties['marker-color'],
+          'marker-symbol': layer.feature.properties['marker-symbol']
+        }));
+      }
     });
-  });
-
-  function update() {
-    var enabled = {};
-    // Run through each checkbox and record whether it is checked. If it is,
-    // add it to the object of types to display, otherwise do not.
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i].checked) enabled[checkboxes[i].id] = true;
+    // highlight the current section
+    for (var i = 0; i < sections.length; i++) {
+      sections[i].className = sections[i].id === newId ? 'active' : '';
     }
-    map.featureLayer.setFilter(function(feature) {
-      // If this symbol is in the list, return true. if not, return false.
-      // The 'in' operator in javascript does exactly that: given a string
-      // or number, it says if that is in a object.
-      // 2 in { 2: true } // true
-      // 2 in { } // false
-      return (feature.properties['marker-symbol'] in enabled);
-    });
+    // And then set the new id as the current one,
+    // so that we know to do nothing at the beginning
+    // of this function if it hasn't changed between calls
+    currentId = newId;
   }
+
+  // If you were to do this for real, you would want to use
+  // something like underscore's _.debounce function to prevent this
+  // call from firing constantly.
+  narrative.onscroll = function(e) {
+    var narrativeHeight = narrative.offsetHeight;
+    var newId = currentId;
+    // Find the section that's currently scrolled-to.
+    // We iterate backwards here so that we find the topmost one.
+    for (var i = sections.length - 1; i >= 0; i--) {
+      var rect = sections[i].getBoundingClientRect();
+      if (rect.top >= 0 && rect.top <= narrativeHeight) {
+        newId = sections[i].id;
+      }
+    }
+    setId(newId);
+  };
 
 }

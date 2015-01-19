@@ -14,7 +14,10 @@ class ReportsController < ApplicationController
         properties: {
           category: report.category.name,
           url: report_path(report),
-          photo: report.photo.small_thumb.url
+          photo: report.photo.small_thumb.url,
+          id: "report-#{report.id}",
+          :"marker-color" => "#00ff00",
+          :"marker-symbol" => 'cafe'
         }
       }
     end

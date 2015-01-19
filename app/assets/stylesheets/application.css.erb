@@ -19,11 +19,19 @@ html, body {
  height: 100%;
 }
 
-#map { top:0; bottom:0; width:100%; }
+nav {
+  z-index: 3;
+}
 
-.new-report-map { height: 500px }
-
-.all-reports-map { width:500px; height: 500px }
+#map {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width:100%;
+  height: 100%;
+  max-width: none;
+  z-index: 1;
+}
 
 #coordinates {height: 500px; width: 500px; background-color: #000; color: #fff }
 
@@ -31,18 +39,6 @@ html, body {
   max-width: 75px;
   width: 100%;
   height: auto;
-}
-
-#new-report-form { height: 500px; }
-
-.filter-ui {
-  background:#fff;
-  position:absolute;
-  top:10px;
-  right:10px;
-  z-index:100;
-  padding:10px;
-  border-radius:3px;
 }
 
 #wrapper {
@@ -57,4 +53,48 @@ html, body {
 
 .no-decoration {
   list-style-type: none;
+}
+
+
+article {
+  position:absolute;
+  top:15px;
+  right:0;
+  bottom:0px;
+  left:0;
+  overflow:auto;
+  z-index: 1;
+}
+.quiet {
+  color:rgba(0,0,0,0.5);
+}
+.scroll {
+  display:block;
+  text-align:center;
+}
+.sections {
+  background:rgba(255,255,255,0.5);
+  width:240px;
+}
+article section {
+  padding:20px;
+  color:rgba(0,0,0,0.5);
+  -webkit-transition:background 500ms, color 500ms;
+  transition:background 500ms, color 500ms;
+}
+section.active {
+  background:#fff;
+  color:#404040;
+}
+
+#last-scroll {
+  height: 2000px;
+  background-color: none;
+}
+
+#new-report-form {
+  position: absolute;
+  left: 10px;
+  background-color: #fff;
+  z-index: 3;
 }

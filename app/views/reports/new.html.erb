@@ -1,12 +1,5 @@
-<div class="row" >
-  <div class="small-12 medium-6 columns">
-    <%= render "form" %>
-  </div>
-  <div class="small-12 medium-6 columns" >
-    <div id="map" class="new-report-map"></div>
-  </div>
-</div>
-
+<div id="map"></div>
+<%= render "form" %>
 <%= content_for :extra_footer do %>
   <% javascript_tag do %>
     $(function(){
