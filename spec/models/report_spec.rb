@@ -27,6 +27,34 @@ describe Report do
     it { should_not have_valid(:status).when("anything else", *blank_values) }
   end
 
+  it ".geojson" do
+    report = FactoryGirl.create(:report)
+    expect(Report.geojson).to eq ({
+      type: "FeatureCollection",
+      features: [
+        { type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [report.longitude, report.latitude]
+          },
+          properties: {
+            category: report.category.name,
+            url: "/reports/#{report.id}",
+            photo: report.photo.small_thumb.url,
+            updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
+            id: "report-#{report.id}",
+            icon: {
+              html: report.iconHTML,
+              iconSize: [50, 50],
+              iconAnchor: [25, 25],
+              popupAnchor: [0, -25],
+              className: "#{report.marker_color} map-icon"
+            }
+          }
+        }
+      ]
+    })
+  end
 
   it { should belong_to(:user) }
   it { should belong_to(:category) }
