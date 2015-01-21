@@ -13,8 +13,9 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
-
+ /*
  */
+
 html, body {
  height: 100%;
 }
@@ -33,7 +34,12 @@ nav {
   z-index: 1;
 }
 
-#coordinates {height: 500px; width: 500px; background-color: #000; color: #fff }
+#coordinates {
+  height: 500px;
+  width: 500px;
+  background-color: #000;
+  color: #fff
+}
 
 .map-thumb {
   max-width: 75px;
@@ -56,37 +62,6 @@ nav {
 }
 
 
-article {
-  position:absolute;
-  top:15px;
-  right:0;
-  bottom:0px;
-  left:0;
-  overflow:auto;
-  z-index: 1;
-}
-.quiet {
-  color:rgba(0,0,0,0.5);
-}
-.scroll {
-  display:block;
-  text-align:center;
-}
-.sections {
-  background:rgba(255,255,255,0.5);
-  width:240px;
-}
-article section {
-  padding:20px;
-  color:rgba(0,0,0,0.5);
-  -webkit-transition:background 500ms, color 500ms;
-  transition:background 500ms, color 500ms;
-}
-section.active {
-  background:#fff;
-  color:#404040;
-}
-
 #last-scroll {
   height: 2000px;
   background-color: none;
@@ -95,6 +70,67 @@ section.active {
 #new-report-form {
   position: absolute;
   left: 10px;
-  background-color: #fff;
+  border-radius: 20px;
+  border: 10px solid #C14B7A;
+  background: #dbefe5;
   z-index: 3;
+  position: relative;
+  top: 100px;
+  left: 100px;
+  float: left;
+  padding: 1%;
+}
+
+#marker-list {
+  position: relative;
+  top: 100px;
+  left: 100px;
+  float: left;
+  background: #dbefe5;
+  padding: 1%;
+  z-index: 2;
+  border-radius: 20px;
+  border: 10px solid #C14B7A;
+  box-sizing: border-box;
+}
+#marker-list li {
+  padding: 2%;
+  list-style-type: none;
+  border-radius: 10px;
+}
+#marker-list li:hover {
+  background: #b8dfcc;
+}
+
+.green {
+  background-color: #38ab5e;
+}
+
+.red {
+  background-color: #c14b7a;
+}
+
+.yellow {
+  background-color: #f5de64;
+}
+
+.map-icon {
+  font-family: 'Flaticon';
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  color: #EDF7F2;
+  font-size: 30px;
+  border: 3px solid #EDF7F2;
+  display: inline-block;
+}
+
+footer {
+  background-color: #2A646B;
+}
+
+fieldset, legend {
+  background-color: none;
 }

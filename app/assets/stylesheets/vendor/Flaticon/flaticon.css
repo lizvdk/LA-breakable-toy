@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "Flaticon";
+  src: url("flaticon.eot");
+  src: url("flaticon.eot#iefix") format("embedded-opentype"),
+  url("flaticon.woff") format("woff"),
+  url("flaticon.ttf") format("truetype"),
+  url("flaticon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-black393:before {
+  content: "\e000";
+}
+.flaticon-brick4:before {
+  content: "\e001";
+}
+.flaticon-exclamation31:before {
+  content: "\e002";
+}
+.flaticon-frown:before {
+  content: "\e003";
+}
+.flaticon-frown2:before {
+  content: "\e004";
+}
+.flaticon-ice89:before {
+  content: "\e005";
+}
+.flaticon-road24:before {
+  content: "\e006";
+}
+.flaticon-shovel1:before {
+  content: "\e007";
+}
+.flaticon-shovel3:before {
+  content: "\e008";
+}
+.flaticon-shovel8:before {
+  content: "\e009";
+}
+.flaticon-skunk:before {
+  content: "\e00a";
+}
+.flaticon-squirrel4:before {
+  content: "\e00b";
+}
+.flaticon-street11:before {
+  content: "\e00c";
+}
+.flaticon-street9:before {
+  content: "\e00d";
+}
+.flaticon-trash31:before {
+  content: "\e00e";
+}
+.flaticon-waste3:before {
+  content: "\e00f";
+}
