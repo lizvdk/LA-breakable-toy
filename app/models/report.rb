@@ -29,6 +29,37 @@ class Report < ActiveRecord::Base
     sprintf("%.4f, %.4f", latitude, longitude)
   end
 
+  def self.geojson
+    geojson = Hash.new
+    features = []
+    geojson[:type] = "FeatureCollection"
+    geojson[:features] = features
+    all.each do |report|
+      features << {
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [report.longitude, report.latitude]
+        },
+        properties: {
+          category: report.category.name,
+          url: "/reports/#{report.id}",
+          photo: report.photo.small_thumb.url,
+          updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
+          id: "report-#{report.id}",
+          icon: {
+            html: report.iconHTML,
+            iconSize: [50, 50],
+            iconAnchor: [25, 25],
+            popupAnchor: [0, -25],
+            className: "#{report.marker_color} map-icon"
+          }
+        }
+      }
+    end
+    geojson
+  end
+
   def image_alt
     "category.name-#{simple_coordinates}"
   end

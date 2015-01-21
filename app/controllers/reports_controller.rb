@@ -2,35 +2,8 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @reports = Report.by_recency
-    @features = []
-    @reports.each do |report|
-      @features << {
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [report.longitude, report.latitude]
-        },
-        properties: {
-          category: report.category.name,
-          url: report_path(report),
-          photo: report.photo.small_thumb.url,
-          created_at: report.created_at.localtime,
-          updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
-          id: "report-#{report.id}",
-          icon: {
-            html: report.iconHTML,
-            iconSize: [50, 50],
-            iconAnchor: [25, 25],
-            popupAnchor: [0, -25],
-            className: "#{report.marker_color} map-icon"
-          }
-        }
-      }
-    end
-    @geojson = Hash.new
-    @geojson[:type] = "FeatureCollection"
-    @geojson[:features] = @features
+    @reports = Report.all
+    @geojson = Report.geojson
 
     respond_to do |format|
       format.html
