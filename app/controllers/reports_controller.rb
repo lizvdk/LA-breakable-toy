@@ -3,35 +3,8 @@ class ReportsController < ApplicationController
 
   def index
     @reports = Report.all
-    @features = []
-    @reports.each do |report|
-      @features << {
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [report.longitude, report.latitude]
-        },
-        properties: {
-          category: report.category.name,
-          url: report_path(report),
-          photo: report.photo.small_thumb.url,
-          created_at: report.created_at.localtime,
-          updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
-          id: "report-#{report.id}",
-          icon: {
-            html: report.iconHTML,
-            iconSize: [50, 50],
-            iconAnchor: [25, 25],
-            popupAnchor: [0, -25],
-            className: "#{report.marker_color} map-icon"
-          }
-        }
-      }
-    end
-    @geojson = Hash.new
-    @geojson[:type] = "FeatureCollection"
-    @geojson[:features] = @features
-
+    @geojson = Report.geojson
+    
     respond_to do |format|
       format.html
       format.json { render json: @geojson }
