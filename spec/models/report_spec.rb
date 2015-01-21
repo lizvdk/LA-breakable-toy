@@ -27,6 +27,15 @@ describe Report do
     it { should_not have_valid(:status).when("anything else", *blank_values) }
   end
 
+  describe ".by_recency" do
+    it "orders the posts by most recent first" do
+      oldest = FactoryGirl.create(:report, created_at: Time.now - 3.days)
+      newest = FactoryGirl.create(:report, created_at: Time.now - 1.day)
+      middle = FactoryGirl.create(:report, created_at: Time.now - 2.days)
+
+      expect(Report.by_recency).to eq [newest, middle, oldest]
+    end
+  end
 
   it { should belong_to(:user) }
   it { should belong_to(:category) }

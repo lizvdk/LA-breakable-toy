@@ -21,6 +21,10 @@ class Report < ActiveRecord::Base
 
   mount_uploader :photo, ReportPhotoUploader
 
+  def self.by_recency
+    order(created_at: :desc)
+  end
+
   def simple_coordinates
     sprintf("%.4f, %.4f", latitude, longitude)
   end

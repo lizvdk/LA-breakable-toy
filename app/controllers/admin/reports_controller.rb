@@ -1,7 +1,7 @@
 module Admin
   class ReportsController < ApplicationController
     def index
-      @reports = Report.all
+      @reports = Report.by_recency
     end
 
     def update
