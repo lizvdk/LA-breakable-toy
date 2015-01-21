@@ -2,10 +2,11 @@ function drawNewReportMap(){
   L.mapbox.accessToken = "pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA";
 
   var geocoder = L.mapbox.geocoder('mapbox.places');
-  var map = L.mapbox.map('map', 'lizvdk.ko5f732m')
-    .setView([42.36, -71.05], 30);
+  var map = L.mapbox.map('map', 'lizvdk.ko5f732m', { zoomControl: false })
+    .setView([42.3603, -71.0580], 20);
+  new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
   var marker = L.marker(new L.LatLng(42.3603, -71.0580), {
-    icon: L.mapbox.marker.icon({'marker-color': 'ff8888'}),
+    icon: L.mapbox.marker.icon({'marker-color': 'C14B7A', 'marker-size' : 'large' }),
     draggable: true
   });
   marker.addTo(map);

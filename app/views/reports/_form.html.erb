@@ -1,6 +1,5 @@
-<div id="new-report-form" class="small-6 columns">
-  <fieldset>
-    <legend>Submit a report</legend>
+<div id="new-report-form" class="">
+    <h3>Submit a report</h3>
     <%= simple_form_for @report do |f| %>
       <div class="row">
         <div class="small-12 medium-6  columns">
@@ -18,5 +17,4 @@
       <%= f.input :photo, type: :file %>
       <%= f.button :submit, "Submit" %>
     <% end %>
-  </fieldset>
 </div>
