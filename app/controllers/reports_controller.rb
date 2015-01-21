@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @reports = Report.all
+    @reports = Report.by_recency
     @features = []
     @reports.each do |report|
       @features << {
