@@ -2,71 +2,58 @@ function drawIndexReportMap(){
 
   L.mapbox.accessToken = "pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA";
 
-  var map = L.mapbox.map("map", "lizvdk.knp8dn4m")
-  .setView([42.36, -71.05], 9)
+  var map = L.mapbox.map("map", "lizvdk.knp8dn4m", { zoomControl: false })
+  .setView([42.36, -71.05], 15)
   .addControl(L.mapbox.geocoderControl('mapbox.places-v1', {
-    autocomplete: true
+    autocomplete: true,
+    position: 'bottomright'
   }));
+  new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 
+  var featureLayer = L.mapbox.featureLayer().addTo(map);
 
-  var featureLayer = L.mapbox.featureLayer()
-    .loadURL('/reports.json')
-    .addTo(map);
-
-  // Ahead of time, select the elements we'll need -
-  // the narrative container and the individual sections
-  var narrative = $('#all-reports').get(0);
-  var sections = $('#all-reports').find('section');
-  var currentId = '';
-
-  setId('cover');
-
-  function setId(newId) {
-    // If the ID hasn't actually changed, don't do anything
-    if (newId === currentId) return;
-    // Otherwise, iterate through layers, setting the current
-    // marker to a different color and zooming to it.
+  featureLayer.on('layeradd', function (e) {
     featureLayer.eachLayer(function(layer) {
-      if (layer.feature.properties.id === newId) {
-        map.setView(layer.getLatLng(), layer.feature.properties.zoom || 14);
-        layer.setIcon(L.mapbox.marker.icon({
-          'marker-size': 'large',
-          'marker-color': '#000',
-          'marker-symbol': layer.feature.properties['marker-symbol']
-        }));
-      } else {
-        layer.setIcon(L.mapbox.marker.icon({
-          'marker-size': 'small',
-          'marker-color': layer.feature.properties['marker-color'],
-          'marker-symbol': layer.feature.properties['marker-symbol']
-        }));
-      }
+      var marker = e.layer,
+      feature = marker.feature;
+      marker.setIcon(L.divIcon(feature.properties.icon));
     });
-    // highlight the current section
-    for (var i = 0; i < sections.length; i++) {
-      sections[i].className = sections[i].id === newId ? 'active' : '';
-    }
-    // And then set the new id as the current one,
-    // so that we know to do nothing at the beginning
-    // of this function if it hasn't changed between calls
-    currentId = newId;
-  }
+  });
 
-  // If you were to do this for real, you would want to use
-  // something like underscore's _.debounce function to prevent this
-  // call from firing constantly.
-  narrative.onscroll = function(e) {
-    var narrativeHeight = narrative.offsetHeight;
-    var newId = currentId;
-    // Find the section that's currently scrolled-to.
-    // We iterate backwards here so that we find the topmost one.
-    for (var i = sections.length - 1; i >= 0; i--) {
-      var rect = sections[i].getBoundingClientRect();
-      if (rect.top >= 0 && rect.top <= narrativeHeight) {
-        newId = sections[i].id;
-      }
-    }
-    setId(newId);
-  };
+  featureLayer.loadURL('/reports.json');
+  var markerList = document.getElementById('marker-list');
+  var filters = document.getElementById('filters');
 
+
+  map.featureLayer.on('ready', function(e) {
+    featureLayer.eachLayer(function(layer) {
+      var item = markerList.appendChild(document.createElement('li'));
+      liContent =
+                  "<div class='row'>" +
+                    "<div class='small-2 columns'>" +
+                      "<div class='" + layer.toGeoJSON().properties.icon.className + "'>" +
+                          layer.toGeoJSON().properties.icon.html +
+                      "</div>" +
+                    "</div>" +
+                    "<div class='small-10 columns'>" +
+                      "<div>" +
+                        "Last Updated:" +
+                        layer.toGeoJSON().properties.updated_at +
+                      "</div>" +
+                    "</div>" +
+                  "</div>";
+
+      item.innerHTML = liContent;
+      item.onclick = function() {
+        map.setView(layer.getLatLng(), 19);
+        layer.openPopup();
+      };
+      var content = '<a target="_blank" class="popup" href="' +
+      layer.feature.properties.url + '">' +
+      '<img class="th radius" src="' + layer.feature.properties.photo + '" />' +
+      layer.feature.properties.category +
+      '</a>';
+      layer.bindPopup(content);
+    });
+  });
 }

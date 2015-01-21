@@ -28,4 +28,45 @@ class Report < ActiveRecord::Base
   def image_alt
     "category.name-#{simple_coordinates}"
   end
+
+  def marker_color
+    case status
+    when "Open"
+      return "green"
+    when "In Progress"
+      return "yellow"
+    when "Closed"
+      return "red"
+    else
+      return "gray"
+    end
+  end
+
+  def iconHTML
+    case category.name
+    when "General" || "Other"
+      "&#57346;"
+    when "Damaged Sign"
+      "&#57357;"
+    when "City Trash Receptacle"
+      "&#57344;"
+    when "Litter"
+      "&#57344;"
+    when "Pick up Dead Animal"
+      "&#57355;"
+    when "Pothole"
+      "&#57350;"
+    when "Sidewalk Patch"
+      "&#57345;"
+    when "Streetlight"
+      "&#57357;"
+    when "Snow/Ice Control"
+      "&#57349;"
+    when "Unshoveled Sidewalk"
+      "&#57353;"
+    else
+      "&#57346;"
+    end
+  end
+
 end
