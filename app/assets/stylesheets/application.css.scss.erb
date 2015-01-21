@@ -1,0 +1,136 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+ /*
+ */
+
+html, body {
+ height: 100%;
+}
+
+nav {
+  z-index: 3;
+}
+
+#map {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width:100%;
+  height: 100%;
+  max-width: none;
+  z-index: 1;
+}
+
+#coordinates {
+  height: 500px;
+  width: 500px;
+  background-color: #000;
+  color: #fff
+}
+
+.map-thumb {
+  max-width: 75px;
+  width: 100%;
+  height: auto;
+}
+
+#wrapper {
+  background: url(<%= asset_data_uri "root-image.jpeg" %>) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100% !important;
+  z-index: 0;
+}
+
+.no-decoration {
+  list-style-type: none;
+}
+
+
+#last-scroll {
+  height: 2000px;
+  background-color: none;
+}
+
+#new-report-form {
+  position: absolute;
+  left: 10px;
+  border-radius: 20px;
+  border: 10px solid #C14B7A;
+  background: #dbefe5;
+  z-index: 3;
+  position: relative;
+  top: 100px;
+  left: 100px;
+  float: left;
+  padding: 1%;
+}
+
+#marker-list {
+  position: relative;
+  top: 100px;
+  left: 100px;
+  float: left;
+  background: #dbefe5;
+  padding: 1%;
+  z-index: 2;
+  border-radius: 20px;
+  border: 10px solid #C14B7A;
+  box-sizing: border-box;
+}
+#marker-list li {
+  padding: 2%;
+  list-style-type: none;
+  border-radius: 10px;
+}
+#marker-list li:hover {
+  background: #b8dfcc;
+}
+
+.green {
+  background-color: #38ab5e;
+}
+
+.red {
+  background-color: #c14b7a;
+}
+
+.yellow {
+  background-color: #f5de64;
+}
+
+.map-icon {
+  font-family: 'Flaticon';
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  color: #EDF7F2;
+  font-size: 30px;
+  border: 3px solid #EDF7F2;
+  display: inline-block;
+}
+
+footer {
+  background-color: #2A646B;
+}
+
+fieldset, legend {
+  background-color: none;
+}

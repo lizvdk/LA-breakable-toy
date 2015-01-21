@@ -2,21 +2,17 @@ function drawNewReportMap(){
   L.mapbox.accessToken = "pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA";
 
   var geocoder = L.mapbox.geocoder('mapbox.places');
-
-  var map = L.mapbox.map('map', 'lizvdk.ko5f732m');
-
-  var marker = L.marker([42.3603, -71.0580],{
-    icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
+  var map = L.mapbox.map('map', 'lizvdk.ko5f732m', { zoomControl: false })
+    .setView([42.3603, -71.0580], 20);
+  new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+  var marker = L.marker(new L.LatLng(42.3603, -71.0580), {
+    icon: L.mapbox.marker.icon({'marker-color': 'C14B7A', 'marker-size' : 'large' }),
     draggable: true
-  }).addTo(map);
+  });
+  marker.addTo(map);
 
   function onLocationFound(e) {
     marker.setLatLng(e.latlng).update();
-    // marker = L.marker(e.latlng, {
-    //   icon: L.mapbox.marker.icon({ 'marker-color': '#f86767' }),
-    //   draggable: true
-    // }).addTo(map);
-
     marker.on('dragend', function (e) {
       $('#report_latitude').val(marker.getLatLng().lat);
       $('#report_longitude').val(marker.getLatLng().lng);
@@ -38,8 +34,6 @@ function drawNewReportMap(){
     var $formAddress = $('#report_address');
 
     $formAddress.focusout( function(e) {
-      // var searchContent = $searchBox.val();
-      // $formAddress.val(searchContent);
       var address = $formAddress.val();
       geocoder.query(address, populateLatLong);
     });

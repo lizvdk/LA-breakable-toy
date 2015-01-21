@@ -7,6 +7,7 @@
   <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Merriweather:400,300" %>
   <%= javascript_include_tag "https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js" %>
   <%= stylesheet_link_tag "https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" %>
+  <%= stylesheet_link_tag "flaticon.css" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -41,11 +42,19 @@
       <%= value %>
     </div>
   <% end %>
-  <div class="row">
-    <%= yield %>
-  </div>
-
-  <%= yield :bg_image_close %>
+  <%= yield %>
+  <footer>
+    <div>
+      Icons made by
+      <a href="http://fontawesome.io" title="Dave Gandy">Dave Gandy</a>,
+      <a href="http://www.freepik.com" title="Freepik">Freepik</a>,
+      <a href="http://www.unocha.org" title="OCHA">OCHA</a> from
+      <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+      is licensed by
+      <a href="http://creativecommons.org/licenses/by/3.0/"
+      title="Creative Commons BY 3.0">CC BY 3.0</a>
+    </div>
+  </footer>
 
   <%= javascript_include_tag 'application' %>
   <%= javascript_tag do %>
