@@ -1,5 +1,10 @@
 describe Category do
-  # let(:blank_values) { [nil, ""] }
+  let(:blank_values) { [nil, ""] }
+
+  describe "#name" do
+    it { should have_valid(:name).when("Streetlight", "Pothole") }
+    it { should_not have_valid(:name).when("#{'x' * 51}", *blank_values) }
+  end
 
   describe "#icon" do
     it "determines which symbol the report marker should display" do
