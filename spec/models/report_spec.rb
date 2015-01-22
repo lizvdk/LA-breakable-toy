@@ -54,7 +54,7 @@ describe Report do
             updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
             id: "report-#{report.id}",
             icon: {
-              html: report.iconHTML,
+              html: report.category.icon,
               iconSize: [50, 50],
               iconAnchor: [25, 25],
               popupAnchor: [0, -25],

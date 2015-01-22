@@ -48,7 +48,7 @@ class Report < ActiveRecord::Base
           updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
           id: "report-#{report.id}",
           icon: {
-            html: report.iconHTML,
+            html: report.category.icon,
             iconSize: [50, 50],
             iconAnchor: [25, 25],
             popupAnchor: [0, -25],
@@ -79,8 +79,6 @@ class Report < ActiveRecord::Base
 
   def iconHTML
     case category.name
-    when "General" || "Other"
-      "&#57346;"
     when "Damaged Sign"
       "&#57357;"
     when "City Trash Receptacle"
