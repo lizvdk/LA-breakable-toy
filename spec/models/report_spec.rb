@@ -66,6 +66,18 @@ describe Report do
     })
   end
 
+  describe "#marker_color" do
+    it "determines what color the report marker should be" do
+      open_report = FactoryGirl.create(:report)
+      in_progress_report = FactoryGirl.create(:report, status: "In Progress")
+      closed_report = FactoryGirl.create(:report, status: "Closed")
+
+      expect(open_report.marker_color).to eq "green"
+      expect(in_progress_report.marker_color).to eq "yellow"
+      expect(closed_report.marker_color).to eq "red"
+    end
+  end
+
   it { should belong_to(:user) }
   it { should belong_to(:category) }
 end
