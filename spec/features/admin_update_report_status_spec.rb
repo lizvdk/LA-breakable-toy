@@ -7,13 +7,16 @@ feature "admin updates status", %{
   } do
 
     let(:admin) { FactoryGirl.create(:user, admin: true) }
-    let(:report) { FactoryGirl.create(:report) }
 
     scenario "admin may update status" do
+      report = FactoryGirl.create(:report)
       sign_in admin
 
       visit root_path
       click_on "Admin Dashboard"
-      click_on "Reports"
+
+      select "Closed", from: "report[status]"
+      click_on "Update Report"
+      expect(page).to have_select("report[status]", selected: "Closed")
     end
   end
