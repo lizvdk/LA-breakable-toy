@@ -88,7 +88,7 @@ $include-html-global-classes: $include-html-classes;
 
 // We use these to define default font stacks
 $font-family-sans-serif: "Montserrat", sans-serif;
-// $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-serif: "Merriweather", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
 // We use these to define default font weights
@@ -111,15 +111,17 @@ $font-family-sans-serif: "Montserrat", sans-serif;
 // $steel       : #666666;
 // $charcoal    : #555555;
 // $tuatara     : #444444;
-$oil         : #012530;
+// $oil         : #012530;
 // $jet         : #222222;
 // $black       : #000000;
+   $verydarkcyan: #2A646B;
+   $modpink     : #C14B7A;
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
-// $success-color: #43AC6A;
+   $success-color: #38AB5E;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
 
@@ -1364,8 +1366,8 @@ $oil         : #012530;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: $verydarkcyan;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: rem-calc(45);
