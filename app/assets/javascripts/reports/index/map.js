@@ -50,10 +50,12 @@ function drawIndexReportMap(){
       };
       var content = '<a target="_blank" class="popup" href="' +
       layer.feature.properties.url + '">' +
-      '<img class="th radius" src="' + layer.feature.properties.photo + '" />' +
+      '<img class="map-photo" src="' + layer.feature.properties.photo + '" />' +
       layer.feature.properties.category +
       '</a>';
-      layer.bindPopup(content);
+      layer.bindPopup(content, {
+        minWidth: 200
+      });
     });
   });
 }
