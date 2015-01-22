@@ -34,7 +34,7 @@ class Report < ActiveRecord::Base
     features = []
     geojson[:type] = "FeatureCollection"
     geojson[:features] = features
-    all.each do |report|
+    by_recency.each do |report|
       features << {
         type: "Feature",
         geometry: {
