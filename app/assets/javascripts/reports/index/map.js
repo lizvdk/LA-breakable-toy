@@ -48,12 +48,15 @@ function drawIndexReportMap(){
         map.setView(layer.getLatLng(), 19);
         layer.openPopup();
       };
-      var content = '<a target="_blank" class="popup" href="' +
-      layer.feature.properties.url + '">' +
-      '<img class="th radius" src="' + layer.feature.properties.photo + '" />' +
-      layer.feature.properties.category +
-      '</a>';
-      layer.bindPopup(content);
+      var content =
+                    '<a target="_blank" class="popup" href="' +
+                      layer.feature.properties.url + '">' +
+                      '<img class="th radius" src="' +
+                        layer.feature.properties.photo +
+                      '" />' +
+                      layer.feature.properties.category +
+                      '</a>';
+      layer.bindPopup(content, { minWidth: 300 });
     });
   });
 }

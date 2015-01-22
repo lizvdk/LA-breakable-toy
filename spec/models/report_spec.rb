@@ -50,7 +50,7 @@ describe Report do
           properties: {
             category: report.category.name,
             url: "/reports/#{report.id}",
-            photo: report.photo.small_thumb.url,
+            photo: report.photo.url,
             updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
             id: "report-#{report.id}",
             icon: {
