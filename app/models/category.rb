@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
     when "Litter"
       "&#57344;"
     when "Pick up Dead Animal"
-      "&#57355;"
+      "&#57355"
     when "Pothole"
       "&#57350;"
     when "Sidewalk Patch"
