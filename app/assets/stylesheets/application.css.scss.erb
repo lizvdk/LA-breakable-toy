@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
+ *= require font-awesome
  /*
  */
 
@@ -128,9 +129,18 @@ nav {
   display: inline-block;
 }
 
-footer {
+footer, {
   background-color: #2A646B;
   padding: 1%;
+  color: #fff;
+}
+
+footer a {
+  color: #C14B7A;
+}
+
+footer a:hover {
+  color: #fff;
 }
 
 fieldset, legend {
@@ -147,5 +157,5 @@ fieldset, legend {
   border: 3px solid white;
   height: 100px;
   width: 100px;
-  margin: 2%;
+  margin-right: 2%;
 }
