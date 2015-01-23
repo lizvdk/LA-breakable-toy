@@ -4,7 +4,6 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { maximum: 50 }
 
-
   def icon
     case name
     when "Damaged Sign"

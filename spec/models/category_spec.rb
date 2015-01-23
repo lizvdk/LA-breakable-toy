@@ -19,8 +19,6 @@ describe Category do
       categories[6].name = "Streetlight"
       categories[7].name = "Snow/Ice Control"
       categories[8].name = "Unshoveled Sidewalk"
-      # categories[9].name = "Damaged Sign"
-
 
       expect(categories[0].icon).to eq "&#57357;"
       expect(categories[1].icon).to eq "&#57344;"

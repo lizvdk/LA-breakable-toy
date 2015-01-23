@@ -9,7 +9,7 @@ feature "admin updates status", %{
     let(:admin) { FactoryGirl.create(:user, admin: true) }
 
     scenario "admin may update status" do
-      report = FactoryGirl.create(:report)
+      FactoryGirl.create(:report)
       sign_in admin
 
       visit root_path
