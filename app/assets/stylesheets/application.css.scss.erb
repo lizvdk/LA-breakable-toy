@@ -13,11 +13,13 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
+ *= require font-awesome
  /*
  */
 
 html, body {
  height: 100%;
+ background-color: #8BD1E3
 }
 
 nav {
@@ -127,8 +129,18 @@ nav {
   display: inline-block;
 }
 
-footer {
+footer, {
   background-color: #2A646B;
+  padding: 1%;
+  color: #fff;
+}
+
+footer a {
+  color: #C14B7A;
+}
+
+footer a:hover {
+  color: #fff;
 }
 
 fieldset, legend {
@@ -138,4 +150,12 @@ fieldset, legend {
 
 .serif {
   font-family: "Merriweather";
+}
+
+.prof-pic {
+  border-radius: 50%;
+  border: 3px solid white;
+  height: 100px;
+  width: 100px;
+  margin-right: 2%;
 }
