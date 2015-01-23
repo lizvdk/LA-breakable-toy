@@ -54,7 +54,7 @@ describe Report do
             updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
             id: "report-#{report.id}",
             icon: {
-              html: report.iconHTML,
+              html: report.category.icon,
               iconSize: [50, 50],
               iconAnchor: [25, 25],
               popupAnchor: [0, -25],
@@ -64,6 +64,18 @@ describe Report do
         }
       ]
     })
+  end
+
+  describe "#marker_color" do
+    it "determines what color the report marker should be" do
+      open_report = FactoryGirl.create(:report)
+      in_progress_report = FactoryGirl.create(:report, status: "In Progress")
+      closed_report = FactoryGirl.create(:report, status: "Closed")
+
+      expect(open_report.marker_color).to eq "green"
+      expect(in_progress_report.marker_color).to eq "yellow"
+      expect(closed_report.marker_color).to eq "red"
+    end
   end
 
   it { should belong_to(:user) }
