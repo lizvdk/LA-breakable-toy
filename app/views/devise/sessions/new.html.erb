@@ -28,18 +28,10 @@
     <div class="row">
       <div class="small-6 columns">
         <div class="actions">
-          <%= f.submit "Log in", class: "button radius" %>
-        </div>
-  <% end %>
-      </div>
-      <div class="small-6 columns">
-        <div class="actions">
-          <%= render "devise/shared/google_login" %>
+          <%= f.submit "Log in" %>
         </div>
       </div>
     </div>
-
-  <div class="row">
-    <%= render "devise/shared/links" %>
-  </div>
+  <% end %>
+  <%= render "devise/shared/links" %>
 </div>
