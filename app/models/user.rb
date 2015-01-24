@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
-    user = User.where(email: ["email"]).first
+    user = User.where(email: data["email"]).first
 
     unless user
       user = User.create(username: "user#{User.all.last.id + 1}",
