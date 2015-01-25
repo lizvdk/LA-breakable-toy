@@ -1,30 +1,33 @@
-<div class="row">
+<div class="row report-info" style="margin-bottom: 2em; margin-top: 2em">
   <div class="small-12 medium-4 columns">
     <%= image_tag(@report.photo.url,
     class: "report-image-#{@report.id}",
       alt: "#{@report.image_alt}" ) %>
     </div>
-    <div class="small-12 medium-8 columns report-info">
+    <div class="small-12 medium-8 columns">
       <div class="row">
-        <div class="<%= @report.marker_color %> map-icon">
+        <h1><div class="<%= @report.marker_color %> map-icon">
           <%= @report.category.icon.html_safe %>
         </div>
-        <%= @report.category.name %>
+        <%= @report.category.name %></h1>
       </div>
       <div class="row">
-        Coordinates: <%= @report.simple_coordinates %>
+        <b>Location:</b> <%= @report.simple_coordinates %>
       </div>
       <div class="row">
         <div>
-          <%= @report.description %>
+          <b>Status:</b> <%= @report.status %>
         </div>
         <div>
-          Status: <%= @report.status %>
-        </div>
-        <div>
-          Posted by: <%= link_to @report.user.username, user_path(@report.user) %> on
+          <b>Posted by:</b> <%= link_to @report.user.username, user_path(@report.user) %> on
           <%= local_time(@report.created_at) %>
-          Last updated: <%= time_ago_in_words(local_time(@report.updated_at)) %> ago
+        </div>
+        <div>
+          <b>Last updated:</b> <%= time_ago_in_words(local_time(@report.updated_at)) %> ago
+        </div>
+        <div>
+          <b>Description: </b><%= @report.description %>
+        </div>
       </div>
       <div class="row">
         <% if current_user == @report.user %>
@@ -35,8 +38,9 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class= "small-12 columns">
-    <%= image_tag ("http://api.tiles.mapbox.com/v4/lizvdk.knp8dn4m/pin-l+2A646B(#{@report.longitude},#{@report.latitude})/#{@report.longitude},#{@report.latitude},18/1280x500.png?access_token=pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA"), style: "padding: 2% 0"%>
+
+<div class="row" style="margin-bottom: 2em">
+  <div class= "small-12 columns show-map">
+    <%= image_tag ("http://api.tiles.mapbox.com/v4/lizvdk.knp8dn4m/pin-l+2A646B(#{@report.longitude},#{@report.latitude})/#{@report.longitude},#{@report.latitude},18/1280x500.png?access_token=pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA") %>
   </div>
 </div>
