@@ -11,10 +11,10 @@
         </div>
         <%= @report.category.name %></h1>
       </div>
-      <div class="row">
+      <div>
         <b>Location:</b> <%= @report.simple_coordinates %>
       </div>
-      <div class="row">
+      <div>
         <div>
           <b>Status:</b> <%= @report.status %>
         </div>
@@ -25,9 +25,11 @@
         <div>
           <b>Last updated:</b> <%= time_ago_in_words(local_time(@report.updated_at)) %> ago
         </div>
-        <div>
-          <b>Description: </b><%= @report.description %>
-        </div>
+      </div>
+      <div>
+        <b>Description: </b><%= @report.description %>
+      </div>
+      </div>
       </div>
       <div class="row">
         <% if current_user == @report.user %>
