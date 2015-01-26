@@ -13,21 +13,24 @@ function drawNewReportMap(){
   var $formAddress = $('#report_address');
   var $formLat = $('#report_latitude');
   var $formLng = $('#report_longitude');
+  var $address = $formAddress.val();
 
   function ondragend() {
     var m = marker.getLatLng();
     $formLat.val(marker.getLatLng().lat);
     $formLng.val(marker.getLatLng().lng);
+
+    geocoder.reverseQuery(m, populateAddress);
   }
 
   function geocodeAddress () {
     $formAddress.change(function(e) {
       var address = $formAddress.val();
-      geocoder.query(address, populateLatLong);
+      geocoder.query(address, moveMarkerPopulateLatLong);
     });
   }
 
-  function populateLatLong(err, data) {
+  function moveMarkerPopulateLatLong(err, data) {
     var lat = data.latlng[0];
     var lng = data.latlng[1];
     $formLat.val(lat);
@@ -35,6 +38,10 @@ function drawNewReportMap(){
 
     marker.setLatLng(data.latlng).update();
     map.panTo(data.latlng);
+  }
+
+  function populateAddress(err, data) {
+    $formAddress.val(data.features[0]["place_name"]);
   }
 
   marker.addTo(map);
