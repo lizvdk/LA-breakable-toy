@@ -1,8 +1,7 @@
 function drawNewReportMap(){
   L.mapbox.accessToken = "pk.eyJ1IjoibGl6dmRrIiwiYSI6IlJodmpRdzQifQ.bUxjjqfXrx41XRFS7cXnIA";
 
-  var map = L.mapbox.map('map', 'lizvdk.ko5f732m', { zoomControl: false })
-  .setView([42.3603, -71.0580], 20);
+  var map = L.mapbox.map('map', 'lizvdk.ko5f732m', { zoomControl: false });
   var geocoder = L.mapbox.geocoder('mapbox.places');
   new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
   var marker = L.marker(new L.LatLng(42.3603, -71.0580), {
@@ -14,6 +13,31 @@ function drawNewReportMap(){
   var $formLat = $('#report_latitude');
   var $formLng = $('#report_longitude');
   var $address = $formAddress.val();
+  var $geolocate = $('#geolocate');
+  map.fitBounds([
+    [42.346397049733966, -71.1029577255249],
+    [42.369451896762385, -71.04429244995117]
+    ]);
+
+  if (!navigator.geolocation) {
+    $geolocate.val('Geolocation is not available');
+  } else {
+    $geolocate.on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      map.locate();
+    });
+  }
+
+  map.on('locationfound', function(e) {
+    map.fitBounds(e.bounds, {paddingTopLeft: [250, 0]});
+    marker.setLatLng(e.latlng).update();
+    ondragend();
+  });
+
+  map.on('locationerror', function() {
+    alert('Not found, enter your address');
+  });
 
   function ondragend() {
     var m = marker.getLatLng();
