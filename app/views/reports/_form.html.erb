@@ -1,6 +1,14 @@
-<div id="new-report-form" class="">
+<div id="new-report-form" class="small-5 columns">
     <h3>Submit a report</h3>
     <%= simple_form_for @report do |f| %>
+      <div class="row">
+        <div class="small-9 columns">
+          <%= f.input :address, label: "Approximate Address" %>
+        </div>
+        <div class="small-3 columns">
+          <a href='#' id='geolocate' class='tiny radius button'>Use My Location</a>
+        </div>
+      </div>
       <div class="row">
         <div class="small-12 medium-6  columns">
           <%= f.association :category %>
@@ -12,9 +20,16 @@
           <%= f.input :longitude %>
         </div>
       </div>
-      <%= f.input :address %>
-      <%= f.input :description %>
-      <%= f.input :photo, type: :file %>
-      <%= f.button :submit, "Submit" %>
+      <div class="row small-12 columns">
+        <%= f.input :description %>
+      </div>
+      <div class="row">
+        <div class="small-6 columns">
+          <%= f.input :photo, type: :file %>
+        </div>
+        <div class="small-6 columns">
+            <%= f.button :submit, "Submit", class: "radius expand" %>
+        </div>
+      </div>
     <% end %>
 </div>
