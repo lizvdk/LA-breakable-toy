@@ -22,11 +22,15 @@ class Report < ActiveRecord::Base
   mount_uploader :photo, ReportPhotoUploader
 
   def self.by_recency
-    order(created_at: :desc)
+    order(updated_at: :desc)
   end
 
   def simple_coordinates
     sprintf("%.4f, %.4f", latitude, longitude)
+  end
+
+  def display_date
+    updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p")
   end
 
   def self.geojson
@@ -45,7 +49,7 @@ class Report < ActiveRecord::Base
           category: report.category.name,
           url: "/reports/#{report.id}",
           photo: report.photo.url,
-          updated_at: report.updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p"),
+          updated_at: report.display_date,
           id: "report-#{report.id}",
           icon: {
             html: report.category.icon,
