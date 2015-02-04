@@ -85,4 +85,8 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def has_vote_from?(user)
+    votes.find_by(user_id: user.id).present?
+  end
+
 end

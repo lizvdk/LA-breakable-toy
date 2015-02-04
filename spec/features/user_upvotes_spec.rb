@@ -28,9 +28,6 @@ feature "user upvotes a report", %q{
 
   scenario "unauthenticated user cannot vote on a report" do
     visit report_path(report)
-    click_button "Fix it!"
-
-    expect(page).to have_content "You need to sign in or sign up
-    before continuing"
+    expect(page).to_not have_button "Fix it!"
   end
 end

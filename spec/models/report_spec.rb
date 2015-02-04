@@ -37,33 +37,35 @@ describe Report do
     end
   end
 
-  it ".geojson" do
-    report = FactoryGirl.create(:report)
-    expect(Report.geojson).to eq ({
-      type: "FeatureCollection",
-      features: [
-        { type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [report.longitude, report.latitude]
-          },
-          properties: {
-            category: report.category.name,
-            url: "/reports/#{report.id}",
-            photo: report.photo.url,
-            updated_at: report.display_date,
-            id: "report-#{report.id}",
-            icon: {
-              html: report.category.icon,
-              iconSize: [50, 50],
-              iconAnchor: [25, 25],
-              popupAnchor: [0, -25],
-              className: "#{report.marker_color} map-icon"
+  describe ".geojson" do
+    it "Builds a geoJSON hash" do
+      report = FactoryGirl.create(:report)
+      expect(Report.geojson).to eq ({
+        type: "FeatureCollection",
+        features: [
+          { type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [report.longitude, report.latitude]
+            },
+            properties: {
+              category: report.category.name,
+              url: "/reports/#{report.id}",
+              photo: report.photo.url,
+              updated_at: report.display_date,
+              id: "report-#{report.id}",
+              icon: {
+                html: report.category.icon,
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25],
+                className: "#{report.marker_color} map-icon"
+              }
             }
           }
-        }
-      ]
-    })
+        ]
+      })
+    end
   end
 
   describe "#marker_color" do
@@ -75,6 +77,24 @@ describe Report do
       expect(open_report.marker_color).to eq "green"
       expect(in_progress_report.marker_color).to eq "yellow"
       expect(closed_report.marker_color).to eq "red"
+    end
+  end
+
+  describe "#has_vote_from?" do
+    it "returns true if given user has already voted on a report" do
+      report = FactoryGirl.create(:report)
+      user = FactoryGirl.create(:user)
+      vote = FactoryGirl.create(:vote, user: user, report: report)
+
+      expect(report).to have_vote_from user
+    end
+
+    it "returns false if given user has not already voted" do
+      report = FactoryGirl.create(:report)
+      user = FactoryGirl.create(:user)
+      vote = FactoryGirl.create(:vote, report: report)
+
+      expect(report).to_not have_vote_from user
     end
   end
 

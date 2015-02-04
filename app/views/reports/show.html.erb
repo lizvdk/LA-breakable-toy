@@ -12,7 +12,10 @@
         <%= @report.category.name %></h1>
       </div>
       <div>
-        <%= button_to "Fix it!", report_votes_path(@report), method: :post %>
+        <% unless current_user.nil? || @report.has_vote_from?(current_user) %>
+          <%= button_to "Fix it!", report_votes_path(@report), method: :post %>
+        <% end %>
+        <%= pluralize(@report.votes.count, 'Vote') %>
       </div>
       <div>
         <b>Location:</b> <%= @report.simple_coordinates %>
