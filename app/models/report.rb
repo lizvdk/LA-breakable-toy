@@ -19,6 +19,10 @@ class Report < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
+  has_many :votes,
+    dependent: :destroy,
+    inverse_of: :report
+
   mount_uploader :photo, ReportPhotoUploader
 
   def self.by_recency

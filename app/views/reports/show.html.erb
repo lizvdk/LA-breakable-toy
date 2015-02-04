@@ -12,6 +12,9 @@
         <%= @report.category.name %></h1>
       </div>
       <div>
+        <%= button_to "Fix it!", report_votes_path(@report), method: :post %>
+      </div>
+      <div>
         <b>Location:</b> <%= @report.simple_coordinates %>
       </div>
       <div>
