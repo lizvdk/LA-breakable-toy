@@ -37,33 +37,35 @@ describe Report do
     end
   end
 
-  it ".geojson" do
-    report = FactoryGirl.create(:report)
-    expect(Report.geojson).to eq ({
-      type: "FeatureCollection",
-      features: [
-        { type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [report.longitude, report.latitude]
-          },
-          properties: {
-            category: report.category.name,
-            url: "/reports/#{report.id}",
-            photo: report.photo.url,
-            updated_at: report.display_date,
-            id: "report-#{report.id}",
-            icon: {
-              html: report.category.icon,
-              iconSize: [50, 50],
-              iconAnchor: [25, 25],
-              popupAnchor: [0, -25],
-              className: "#{report.marker_color} map-icon"
+  describe ".geojson" do
+    it "generates a geoJSON hash" do
+      report = FactoryGirl.create(:report)
+      expect(Report.geojson).to eq ({
+        type: "FeatureCollection",
+        features: [
+          { type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [report.longitude, report.latitude]
+            },
+            properties: {
+              category: report.category.name,
+              url: "/reports/#{report.id}",
+              photo: report.photo.url,
+              updated_at: report.display_date,
+              id: "report-#{report.id}",
+              icon: {
+                html: report.category.icon,
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
+                popupAnchor: [0, -25],
+                className: "#{report.marker_color} map-icon"
+              }
             }
           }
-        }
-      ]
-    })
+        ]
+      })
+    end
   end
 
   describe "#marker_color" do
