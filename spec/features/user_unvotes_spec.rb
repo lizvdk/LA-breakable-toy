@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 feature "user un-votes a report", %q{
   As a User
