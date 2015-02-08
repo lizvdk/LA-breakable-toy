@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "callbacks" }
 
   resources :users, only: :show
-  resources :reports
+  resources :reports do
+    resources :votes, only: [:create, :destroy]
+  end
 
   namespace :admin do
     resources :dashboards, only: [:index]

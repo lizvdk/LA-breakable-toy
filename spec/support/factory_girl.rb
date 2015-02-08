@@ -20,4 +20,9 @@ FactoryGirl.define do
     user
     category
   end
+
+  factory :vote do
+    report
+    user
+  end
 end

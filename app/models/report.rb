@@ -19,6 +19,9 @@ class Report < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
+  has_many :votes, dependent: :destroy,
+                   inverse_of: :report
+
   mount_uploader :photo, ReportPhotoUploader
 
   def self.by_recency
@@ -81,4 +84,11 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def vote_from(user)
+    votes.find_by(user_id: user.id)
+  end
+
+  def has_vote_from?(user)
+    vote_from(user).present?
+  end
 end

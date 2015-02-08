@@ -80,6 +80,24 @@ describe Report do
     end
   end
 
+  describe "#has_vote_from?" do
+    it "returns true if given user has already voted on a report" do
+      report = FactoryGirl.create(:report)
+      user = FactoryGirl.create(:user)
+      FactoryGirl.create(:vote, user: user, report: report)
+
+      expect(report).to have_vote_from user
+    end
+
+    it "returns false if given user has not already voted" do
+      report = FactoryGirl.create(:report)
+      user = FactoryGirl.create(:user)
+      FactoryGirl.create(:vote, report: report)
+
+      expect(report).to_not have_vote_from user
+    end
+  end
+
   it { should belong_to(:user) }
   it { should belong_to(:category) }
 end
