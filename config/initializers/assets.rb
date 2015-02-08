@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w( reports/index/map.js )
 Rails.application.config.assets.precompile += %w( reports/new/map.js )
+Rails.application.config.assets.precompile += %w( vendor/flaticon.css )
