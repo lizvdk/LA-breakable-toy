@@ -19,9 +19,8 @@ class Report < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  has_many :votes,
-    dependent: :destroy,
-    inverse_of: :report
+  has_many :votes, dependent: :destroy,
+                   inverse_of: :report
 
   mount_uploader :photo, ReportPhotoUploader
 
@@ -92,5 +91,4 @@ class Report < ActiveRecord::Base
   def has_vote_from?(user)
     vote_from(user).present?
   end
-
 end

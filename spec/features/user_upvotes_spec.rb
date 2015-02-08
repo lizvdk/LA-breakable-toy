@@ -1,11 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
-feature "user upvotes a report", %q{
+feature "user upvotes a report", %{
   As a user
   I want to upvote a report
   So that I can express my concern about the report
 } do
-
   let(:report) { FactoryGirl.create(:report) }
 
   context "as an authenticated user" do

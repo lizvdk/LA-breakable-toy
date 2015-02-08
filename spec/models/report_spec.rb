@@ -84,7 +84,7 @@ describe Report do
     it "returns true if given user has already voted on a report" do
       report = FactoryGirl.create(:report)
       user = FactoryGirl.create(:user)
-      vote = FactoryGirl.create(:vote, user: user, report: report)
+      FactoryGirl.create(:vote, user: user, report: report)
 
       expect(report).to have_vote_from user
     end
@@ -92,7 +92,7 @@ describe Report do
     it "returns false if given user has not already voted" do
       report = FactoryGirl.create(:report)
       user = FactoryGirl.create(:user)
-      vote = FactoryGirl.create(:vote, report: report)
+      FactoryGirl.create(:vote, report: report)
 
       expect(report).to_not have_vote_from user
     end

@@ -1,11 +1,10 @@
 require "rails_helper"
 
-feature "user un-votes a report", %q{
+feature "user un-votes a report", %{
   As a User
   I want to delete my vote for a report
   So that I can undo my vote if it was an accident
 } do
-
   scenario "user removes their votes" do
     vote = FactoryGirl.create(:vote)
     sign_in vote.user
