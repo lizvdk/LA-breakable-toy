@@ -38,7 +38,7 @@ describe Report do
   end
 
   describe ".geojson" do
-    it "Builds a geoJSON hash" do
+    it "generates a geoJSON hash" do
       report = FactoryGirl.create(:report)
       expect(Report.geojson).to eq ({
         type: "FeatureCollection",
