@@ -16,10 +16,12 @@
           <% if @report.has_vote_from?(current_user) %>
             <%= button_to "Remove Vote",
                 report_vote_path(@report, @report.vote_from(current_user)),
-                method: :delete %>
+                method: :delete,
+                class: "button tiny radius alert" %>
           <% else %>
             <%= button_to "Fix it!", report_votes_path(@report),
-                  method: :post %>
+                  method: :post,
+                  class: "button tiny radius" %>
           <% end %>
         <% end %>
         <%= pluralize(@report.votes.count, 'Vote') %>
