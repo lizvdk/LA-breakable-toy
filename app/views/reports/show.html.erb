@@ -12,8 +12,15 @@
         <%= @report.category.name %></h1>
       </div>
       <div>
-        <% unless current_user.nil? || @report.has_vote_from?(current_user) %>
-          <%= button_to "Fix it!", report_votes_path(@report), method: :post %>
+        <% if current_user %>
+          <% if @report.has_vote_from?(current_user) %>
+            <%= button_to "Remove Vote",
+                report_vote_path(@report, @report.vote_from(current_user)),
+                method: :delete %>
+          <% else %>
+            <%= button_to "Fix it!", report_votes_path(@report),
+                  method: :post %>
+          <% end %>
         <% end %>
         <%= pluralize(@report.votes.count, 'Vote') %>
       </div>
@@ -34,8 +41,6 @@
       </div>
       <div>
         <b>Description: </b><%= @report.description %>
-      </div>
-      </div>
       </div>
       <div class="row">
         <% if current_user == @report.user %>

@@ -15,6 +15,6 @@ class VotesController < ApplicationController
 
   def destroy
     current_user.votes.destroy(params[:id])
-    redirect_to :back, notice: "Vote Removed"
+    redirect_to :back, notice: "Your vote has been removed"
   end
 end

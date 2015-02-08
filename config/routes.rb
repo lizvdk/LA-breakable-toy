@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :show
   resources :reports do
-    resources :votes, only: [:create]
+    resources :votes, only: [:create, :destroy]
   end
 
   namespace :admin do
