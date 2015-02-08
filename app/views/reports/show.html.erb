@@ -1,5 +1,5 @@
 <div class="row report-info" style="margin-bottom: 2em; margin-top: 2em">
-  <div class="small-12 medium-4 columns">
+  <div class="small-12 medium-4 columns" data-post-id="<%= @report.id %>">
     <%= image_tag(@report.photo.url,
     class: "report-image-#{@report.id}",
       alt: "#{@report.image_alt}" ) %>
@@ -17,11 +17,13 @@
             <%= button_to "Remove Vote",
                 report_vote_path(@report, @report.vote_from(current_user)),
                 method: :delete,
-                class: "button tiny radius alert" %>
+                class: "button tiny radius alert",
+                form: { data: { 'vote-button' => 'delete' } } %>
           <% else %>
             <%= button_to "Fix it!", report_votes_path(@report),
                   method: :post,
-                  class: "button tiny radius" %>
+                  class: "button tiny radius",
+                  form: { data: { 'vote-button' => 'create' } } %>
           <% end %>
         <% end %>
         <%= pluralize(@report.votes.count, 'Vote') %>

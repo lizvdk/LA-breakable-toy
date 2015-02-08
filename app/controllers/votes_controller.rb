@@ -5,16 +5,22 @@ class VotesController < ApplicationController
     report = Report.find(params[:report_id])
     vote = current_user.votes.build
     vote.report = report
-
-    if vote.save
-      redirect_to :back, notice: "Your concern has been recorded!"
-    else
-      redirect_to :back
+    respond_to do |format|
+      if vote.save
+        format.html { redirect_to :back, notice: "Your concern has been recorded!" }
+        format.json { render json: vote }
+      else
+        format.html { redirect_to :back }
+        format.json { render json: vote.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     current_user.votes.destroy(params[:id])
-    redirect_to :back, notice: "Your vote has been removed"
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "Your vote has been removed" }
+      format.json { head :no_content }
+    end
   end
 end
