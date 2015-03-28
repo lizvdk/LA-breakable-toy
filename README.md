@@ -10,12 +10,6 @@ Brighter Boston is my 'Breakable Toy' (capstone project) for [Launch Academy](ht
 This app is based on The City of Boston's [Citizens Connect](https://mayors24.cityofboston.gov:4443/).
 
 ---
-![Constuction](app/assets/images/under-construction.png)
-**This app is currently Under Construction.**
-
-*More features and improvements are on the way!*
-
----
 
 [![Build Status](https://travis-ci.org/lizvdk/LA-breakable-toy.svg?branch=master)](https://travis-ci.org/lizvdk/LA-breakable-toy)
 [![Code Climate](https://codeclimate.com/github/lizvdk/LA-breakable-toy/badges/gpa.svg)](https://codeclimate.com/github/lizvdk/LA-breakable-toy)
