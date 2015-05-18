@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.0.0
+  - 2.2.1
 before_script:
   - psql -c 'create database breakable_toy_test;' -U postgres
 bundler_args: --without production
