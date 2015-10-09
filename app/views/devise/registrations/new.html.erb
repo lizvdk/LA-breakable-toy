@@ -1,47 +1,50 @@
-<div class="small-6 columns small-centered">
-  <h2>Sign up</h2>
+<h2 class="text-center">Sign up</h2>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="row">
-      <div class="field small-12 columns">
-        <%= f.label :username %><br />
-        <%= f.text_field :username, autofocus: true %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class="row">
+    <div class="small-8 small-centered medium-6 columns">
+      <%= devise_error_messages! %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-8 small-centered medium-6 columns">
+      <%= f.label :username %>
+      <%= f.text_field :username, autofocus: true, placeholder: 'bostonfan14' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-8 small-centered medium-6 columns">
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: 'brighterboston@example.com' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-8 small-centered medium-uncentered medium-3 medium-offset-3  columns">
+      <div class="field">
+        <%= f.label :password %>
+        <% if @validatable %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off" %>
       </div>
     </div>
 
-    <div class="row">
-      <div class="field small-12 columns">
-        <%= f.label :email %><br />
-        <%= f.email_field :email %>
+    <div class="small-8 small-centered medium-uncentered medium-3 end columns">
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="small-6 columns">
-        <div class="field">
-          <%= f.label :password %>
-          <% if @validatable %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "off" %>
-        </div>
-      </div>
-      <div class="small-6 columns">
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off" %>
-        </div>
+  <div class="row">
+    <div class="small-8 medium-6 small-centered end columns">
+      <div class="actions">
+        <%= f.submit "Sign up", class: "button radius expand" %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="small-6 columns">
-        <div class="actions">
-          <%= f.submit "Sign up", class: "button radius" %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-  <%= render "devise/shared/links" %>
-</div>
+  </div>
+<% end %>
+<%= render "devise/shared/links" %>

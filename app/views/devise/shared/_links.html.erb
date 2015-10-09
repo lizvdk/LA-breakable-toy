@@ -1,13 +1,14 @@
 <div class= "row">
-  <div class="small-6 columns">
+  <div class="small-8 medium-6 small-centered columns">
     <%- if devise_mapping.omniauthable? %>
-    <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to image_tag("google-sign-in.png", style: "margin: 0 auto", alt: "Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path(resource_name, provider) %>
-    <% end -%>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to image_tag("google-sign-in.png", class: "google-sign-in", alt: "Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path(resource_name, provider), class: 'text-center' %>
+      <% end -%>
     <% end -%>
   </div>
-  
-  <div class="small-6 columns">
+</div>
+<div class= "row">
+  <div class="small-8 medium-6 small-centered columns text-center">
     <%- if controller_name != 'sessions' %>
       <%= link_to "Log in", new_session_path(resource_name) %><br />
     <% end -%>

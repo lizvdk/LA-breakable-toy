@@ -40,22 +40,26 @@
     </section>
   </nav>
 
-  <% flash.each do |key, value| %>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
+  <div class="row">
+    <div class="small-10 small-centered columns">
+      <% flash.each do |name, msg| %>
+        <% if msg.is_a?(String) %>
+          <div data-alert class="alert-box radius <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+            <%= content_tag :div, msg %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
   <%= yield %>
+
   <footer>
     <%= render "layouts/footer_content" %>
   </footer>
 
   <%= javascript_include_tag 'application' %>
-  <%= javascript_tag do %>
-    $(function(){
-      $(document).foundation();
-    });
-  <% end %>
+
   <%= yield :extra_footer %>
 </body >
 </html>
