@@ -8,17 +8,19 @@
   <%= javascript_include_tag "https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js" %>
   <%= stylesheet_link_tag "https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" %>
   <%= stylesheet_link_tag "vendor/flaticon" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <nav class="top-bar">
+  <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name">
         <h1><a href="/"><div class="title">
           Brighter <span class="title serif">Boston</span>
           </div></a></h1>
       </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
 
     <section class="top-bar-section">
@@ -39,22 +41,26 @@
     </section>
   </nav>
 
-  <% flash.each do |key, value| %>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
+  <div class="row">
+    <div class="small-10 small-centered columns">
+      <% flash.each do |name, msg| %>
+        <% if msg.is_a?(String) %>
+          <div data-alert class="alert-box radius <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+            <%= content_tag :div, msg %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
   <%= yield %>
+
   <footer>
     <%= render "layouts/footer_content" %>
   </footer>
 
   <%= javascript_include_tag 'application' %>
-  <%= javascript_tag do %>
-    $(function(){
-      $(document).foundation();
-    });
-  <% end %>
+
   <%= yield :extra_footer %>
 </body >
 </html>
