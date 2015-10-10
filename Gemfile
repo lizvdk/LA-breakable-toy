@@ -34,6 +34,6 @@ end
 group :test do
   gem "coveralls", require: false
   gem "launchy"
-  gem "shoulda-matchers", require: false
+  gem "shoulda-matchers"
   gem "valid_attribute"
 end
