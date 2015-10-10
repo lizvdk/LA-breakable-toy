@@ -6,7 +6,7 @@ gem "coffee-rails", "~> 4.1.0"
 gem "devise"
 gem "fog", groups: [:development, :production]
 gem "font-awesome-rails"
-gem "foundation-rails"
+gem "foundation-rails", '5.5.2.1'
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
 gem "local_time"

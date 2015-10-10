@@ -14,6 +14,6 @@
 //= require jquery_ujs
 //= require foundation
 //= require local_time
-//= require_tree .
-
-$(function(){ $(document).foundation(); });
+//= require reports/index/map
+//= require reports/new/map
+//= require reports/votes
