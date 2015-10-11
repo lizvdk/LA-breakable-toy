@@ -15,6 +15,7 @@ gem "newrelic_rpm"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "pg"
+gem "puma"
 gem "rails", "4.2.1"
 gem "rails_12factor", group: :production
 gem "sass-rails", "~> 5.0"
