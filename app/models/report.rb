@@ -1,4 +1,6 @@
 class Report < ActiveRecord::Base
+  include ActionView::Helpers::DateHelper
+
   validates :latitude, presence: true
   validates :latitude, numericality: { greater_than_or_equal_to: -90,
                                        less_than_or_equal_to: 90 }
@@ -33,7 +35,7 @@ class Report < ActiveRecord::Base
   end
 
   def display_date
-    updated_at.localtime.strftime("%m/%d/%Y at %I:%M%p")
+    "#{time_ago_in_words(created_at)} ago"
   end
 
   def self.geojson
@@ -52,7 +54,7 @@ class Report < ActiveRecord::Base
           category: report.category.name,
           url: "/reports/#{report.id}",
           photo: report.photo.url,
-          updated_at: report.display_date,
+          created_at: report.display_date,
           id: "report-#{report.id}",
           icon: {
             html: report.category.icon,

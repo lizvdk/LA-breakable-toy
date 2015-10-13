@@ -36,9 +36,12 @@ function drawIndexReportMap(){
                       "</div>" +
                     "</div>" +
                     "<div class='small-10 columns'>" +
-                      "<div>" +
-                        "Last Updated:" +
-                        layer.toGeoJSON().properties.updated_at +
+                      "<div><strong>" +
+                        layer.toGeoJSON().properties.category +
+                      "</div></strong>" +
+                      "<div class>" +
+                        "reported " +
+                        layer.toGeoJSON().properties.created_at +
                       "</div>" +
                     "</div>" +
                   "</div>";
