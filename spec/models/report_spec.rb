@@ -52,7 +52,7 @@ describe Report do
               category: report.category.name,
               url: "/reports/#{report.id}",
               photo: report.photo.url,
-              updated_at: report.display_date,
+              created_at: report.display_date,
               id: "report-#{report.id}",
               icon: {
                 html: report.category.icon,
